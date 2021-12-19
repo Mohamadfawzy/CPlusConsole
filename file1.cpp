@@ -1,3 +1,4 @@
+
 #include <iostream>
 using namespace std;
 class Rectangle {
@@ -39,10 +40,11 @@ public:
 int main()
 {
 	Rectangle rec1; // call default constructor
+	cout << "default Perimeter = " << rec1.Perimeter() << endl;
 	cout << "perimeter of rectangle rec1= " << rec1.Perimeter(8, 4) << endl;
 
-	Rectangle rec2(rec1);
-	rec2.SetHeight(9);// Width of rec2 == Width of rec1, this is copy costructor
+	Rectangle rec2(rec1); // this is copy costructor
+	rec2.SetHeight(9);// Width of rec2 == Width of rec1
 	cout << "perimeter of rectangle rec2= " << rec2.Perimeter() << endl;
 
 	Rectangle rec3(8,4); // call overloaded constructor
