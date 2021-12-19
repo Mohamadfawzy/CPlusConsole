@@ -1,10 +1,11 @@
 
 #include <iostream>
 using namespace std;
-class Rectangle {
+template <class T>
+class Rectangle{
 private:
-	float Height;
-	float Width;
+	T Height;
+	T Width;
 public:
 	// Constructor default
 	Rectangle() {
@@ -12,12 +13,12 @@ public:
 		Width = 210; // mm
 	}
 	//Constructor overloaded
-	Rectangle(float height, float width) {
+	Rectangle(T height, T width) {
 		Height = height;
 		Width = width;
 	}
 	// get Perimeter, ((set height and width) option)
-	float Perimeter(float h = 0, float w = 0) {
+	T Perimeter(T h = 0, T w = 0) {
 		if (h != 0 || w != 0) {
 			Height = h;
 			Width = w;
@@ -39,14 +40,14 @@ public:
 
 int main()
 {
-	Rectangle rec1; // call default constructor
+	Rectangle<float> rec1; // call default constructor
 	cout << "default Perimeter = " << rec1.Perimeter() << endl;
 	cout << "perimeter of rectangle rec1= " << rec1.Perimeter(8, 4) << endl;
 
-	Rectangle rec2(rec1); // this is copy costructor
+	Rectangle<float> rec2(rec1); // this is copy costructor
 	rec2.SetHeight(9);// Width of rec2 == Width of rec1
 	cout << "perimeter of rectangle rec2= " << rec2.Perimeter() << endl;
 
-	Rectangle rec3(8,4); // call overloaded constructor
+	Rectangle<float> rec3(8,4); // call overloaded constructor
 	cout << "perimeter of rectangle rec3= " << rec3.Perimeter() << endl;
 }
