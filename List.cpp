@@ -17,14 +17,14 @@ class List
 	Node* head = NULL;
 	Node* cursor = NULL;
 	Node* prev = NULL;
+public:
+	List() {
 
+	}
 	~List() {
 		MakeListEmpty();
 	}
-	void MakeListEmpty() {
-
-	}
-	bool ListIsEmpty() {
+	bool ListIsEmpty() const {
 		return (head == NULL);
 	}
 	bool CurIsEmpty() const {
@@ -54,7 +54,7 @@ class List
 	//  هل انت في الأخر؟
 	bool atEnd() const {
 		// الهيد مش فاضي
-		if (ListIsEmpty)
+		if (ListIsEmpty())
 			return true;
 		// الهيد مش فاضي لكن الركنت == فاضي
 		else if (CurIsEmpty())
@@ -76,12 +76,13 @@ class List
 	{
 		cursor->data = d;
 	}
-	void RetrievveData(int& k, char& d)const
+
+	void RetrieveData(int& k, char& d)const
 	{
 		d = cursor->data;
 		k = cursor->key;
-
 	}
+
 	void RetrievveKey(int& k)const
 	{
 		k = cursor->key;
@@ -111,7 +112,6 @@ class List
 		cursor->next = pNew;
 		prev = cursor;
 		cursor = pNew;
-
 	}
 	void InsertBefore(const int& k, const char& d) {
 		Node* pNew;
@@ -126,7 +126,7 @@ class List
 	}
 
 	void InsertEnd(const int& k, const char& d) {
-		if (ListIsEmpty)
+		if (ListIsEmpty())
 			InsertFirst(k, d);
 		else {
 			ToEnd();
@@ -154,14 +154,14 @@ class List
 		}
 	}
 	void DeleteFirst() {
-		if (!ListIsEmpty)
+		if (!ListIsEmpty())
 		{
 			ToFirst();
 			DeleteNode();
 		}
 	}
 	void DeleteEnd() {
-		if (!ListIsEmpty)
+		if (!ListIsEmpty())
 		{
 			ToEnd();
 			DeleteNode();
@@ -195,7 +195,7 @@ class List
 		if (prev == NULL)
 			InsertFirst(k, d);
 		else
-			InsertBefore(k,d);
+			InsertBefore(k, d);
 
 	}
 	void Traverse()
@@ -203,19 +203,44 @@ class List
 		ToFirst();
 		while (!CurIsEmpty())
 		{
-			cout << cursor->data << endl;
+			cout << cursor->key << " " << cursor->data << endl;
 			Advance();
 		}
 	}
 };
-
-
-
-
+int CoutZero(List& l) {
+	int count = 0; int k; char d;
+	l.ToFirst();
+	while (!l.CurIsEmpty()) {
+		l.RetrieveData(k, d);
+		if (k == 0)
+			count++;
+		l.Advance();
+	}
+	return count;
+}
+int SumKey(List &l) {
+	int count = 0; int k; char d;
+	l.ToFirst();
+	while (!l.CurIsEmpty()) {
+		l.RetrieveData(k, d);
+		count += k;
+		l.Advance();
+	}
+	return count;
+}
 
 int main()
 {
-
+	List list;
+	list.InsertEnd(1, 'a');
+	list.InsertEnd(2, 'b');
+	list.InsertEnd(3, 'c');
+	list.InsertEnd(5, 'e');
+	list.OrderInsert(1, 'd');
+	list.Traverse();
+	cout << "count: " << CoutZero(list);
+	cout << "count: " << SumKey(list);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
